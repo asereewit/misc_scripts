@@ -21,11 +21,10 @@ def main(arguments):
         record.seq = record.seq.replace("=","")
         # get rid of "-" to produce unaligned fasta file; comment out to produce aligned fasta file
         record.seq = record.seq.replace("-","")
-        if cluster_num in cluster_dict:
-            cluster_dict[cluster_num].append(record)
-        else:
+
+        if cluster_num not in cluster_dict:
             cluster_dict[cluster_num] = []
-            cluster_dict[cluster_num].append(record)
+        cluster_dict[cluster_num].append(record)
 
     for key in cluster_dict:
         SeqIO.write(cluster_dict[key], f"{key}.fasta", "fasta")
