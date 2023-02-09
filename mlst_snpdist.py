@@ -36,8 +36,7 @@ def main(arguments):
     df_snpdists = pd.read_excel(args.snpdists, index_col=0)
     mlst_snpdists = []
     for key in fasta_combination:    
-        for i in range(len(fasta_combination[key])):
-            pair = fasta_combination[key][i]
+        for pair in fasta_combination[key]:
             mlst_snpdists.append([key, pair[0], pair[1], df_snpdists.loc[pair[0],pair[1]]])
 
     df_out = pd.DataFrame(mlst_snpdists, columns=['mlst_value','fasta1','fasta2','snp_dists'])
